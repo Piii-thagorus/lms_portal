@@ -3,6 +3,9 @@
   "version": 2,
   "projects": {
     "home": "apps/home",
-    "home-e2e": "apps/home-e2e"
+    "home-e2e": "apps/home-e2e",
+    "login": "apps/login",
+    "login-e2e": "apps/login-e2e",
+    "shared": "libs/shared"
   }
 }
