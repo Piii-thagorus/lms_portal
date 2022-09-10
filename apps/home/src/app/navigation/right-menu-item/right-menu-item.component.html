@@ -1,0 +1,22 @@
+<mat-nav-list [style.max-height]="(menu.open )? '1200px' : '48px' "
+              [ngClass]="{'secondaryMenu' : subMenu, 'primary' : !subMenu}">
+   <mat-list-item *ngIf="menu.link === false" (click)="openLink()">
+       <mat-icon matListIcon iconsmall> {{menu.icon}} </mat-icon>
+       <h3 matLine *ngIf="!iconOnly">{{menu.name}}</h3>
+       <mat-chip-list *ngIf="menu?.chip && !iconOnly">
+           <mat-chip>{{menu?.chip?.value}}</mat-chip>
+       </mat-chip-list>
+       <mat-icon *ngIf="checkForSubMenu()" class="sidenav-dropdown-indicator rotate"
+                 [ngClass]="{'indicateOpen' : menu.open}"> expand_more
+       </mat-icon>
+   </mat-list-item>
+
+    <mat-list-item *ngIf="menu.link !== false" (click)="openLink()" [routerLink]="[menu.link]">
+
+        <mat-icon matListIcon iconsmall> {{menu.icon}} </mat-icon>
+        <h3 matLine *ngIf="!iconOnly">{{menu.name}}</h3>
+    </mat-list-item>
+
+    <lms-portal-mfe-right-menu-item *ngFor="let sub of menu?.sub" [menu]="sub"
+                                    [iconOnly]="iconOnly" [subMenu]="true"></lms-portal-mfe-right-menu-item>
+</mat-nav-list>
