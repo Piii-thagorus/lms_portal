@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { RemoteEntryComponent } from './entry.component';
+import { LogInComponent } from './login.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {FormsModule} from "@angular/forms";
@@ -11,13 +11,13 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
-  declarations: [RemoteEntryComponent],
+  declarations: [LogInComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {
         path: '',
-        component: RemoteEntryComponent,
+        component: LogInComponent,
       },
     ]),
     MatIconModule,

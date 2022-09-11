@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: 'login-page.html',
   styleUrls: ['./login.page.scss']
 })
-export class RemoteEntryComponent {}
+export class LogInComponent {}
