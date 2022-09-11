@@ -1,9 +1,18 @@
+import auth from '../../auth_config.json'
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const domain = auth.domain
+const clientId = auth.clientId
 export const environment = {
   production: false,
+  auth: {
+    domain,
+    clientId,
+    redirectUri: window.location.origin,
+  },
 };
 
 /*
