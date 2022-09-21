@@ -11,6 +11,9 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { RightMenuItemComponent } from './right-menu-item/right-menu-item.component';
 import {loadRemoteModule} from "@nrwl/angular/mf";
 import {ROUTES} from "../app.routes";
+import {AppModule} from "../app.module";
+import {AuthModule} from "@auth0/auth0-angular";
+import {environment} from "../../environments/environment";
 
 @NgModule({
   declarations: [
@@ -26,10 +29,12 @@ import {ROUTES} from "../app.routes";
     FlexLayoutModule,
     RouterModule,
     NgScrollbarModule,
-      RouterModule.forRoot(
+    RouterModule.forRoot(
           ROUTES
-      )
-   // [loadRemoteModule("login/Module", "appModule")],
+      ),
+      AuthModule.forRoot({
+        ...environment.auth
+      }),
   ],
   exports: [NavigationComponent, LeftMenuComponent],
 })
