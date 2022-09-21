@@ -4,8 +4,9 @@ export const ROUTES : Routes = [
 
 
     {
-        path: 'login',
-        outlet: 'leftMenu',
+        path: '',
+        outlet: 'topMenu',
+        pathMatch: 'full',
         loadChildren: () => import(
             'login/Module'
             ).then((m) => m.RemoteEntryModule)
