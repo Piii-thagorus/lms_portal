@@ -9,9 +9,14 @@ import {FormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
+import {AuthModule} from "@auth0/auth0-angular";
+import {environment} from "../../environments/environment";
+import {AuthComponentComponent} from "./components/auth-component/auth-component.component";
+import {LogoutButtonComponent} from "./components/logout-button/logout-button.component";
+import {LoginButtonComponent} from "./components/login-button/login-button.component";
 
 @NgModule({
-  declarations: [LogInComponent],
+  declarations: [LogInComponent, AuthComponentComponent, LogoutButtonComponent, LoginButtonComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -26,6 +31,9 @@ import {MatButtonModule} from "@angular/material/button";
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    // AuthModule.forRoot({
+    //     ...environment.auth
+    //   })
   ],
   providers: [],
 })
