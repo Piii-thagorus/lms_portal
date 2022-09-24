@@ -14,7 +14,16 @@
         "tsConfig": "apps/calendar/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/calendar/src/favicon.ico", "apps/calendar/src/assets"],
-        "styles": ["apps/calendar/src/styles.scss"],
+        "styles": [
+          "apps/calendar/src/styles.scss",
+          "./node_modules/@fullcalendar/common/main.css",
+          "./node_modules/@fullcalendar/daygrid/main.css",
+          "./node_modules/@fullcalendar/bootstrap5/main.css",
+          "./node_modules/@fullcalendar/timeline/main.css",
+          "./node_modules/@fullcalendar/resource-timeline/main.css",
+          "./node_modules/@fullcalendar/timegrid/main.css",
+          "./node_modules/@fullcalendar/list/main.css"
+        ],
         "scripts": [],
         "customWebpackConfig": {
           "path": "apps/calendar/webpack.config.js"
