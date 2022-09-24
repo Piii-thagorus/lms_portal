@@ -12,6 +12,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {AuthComponentComponent} from "./components/auth-component/auth-component.component";
 import {LogoutButtonComponent} from "./components/logout-button/logout-button.component";
 import {LoginButtonComponent} from "./components/login-button/login-button.component";
+import {AuthModule} from "@auth0/auth0-angular";
+import {environment} from "../../environments/environment";
 
 @NgModule({
   declarations: [LogInComponent, AuthComponentComponent, LogoutButtonComponent, LoginButtonComponent],
@@ -29,9 +31,9 @@ import {LoginButtonComponent} from "./components/login-button/login-button.compo
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    // AuthModule.forRoot({
-    //     ...environment.auth
-    //   })
+    AuthModule.forRoot({
+        ...environment.auth
+      })
   ],
   providers: [],
 })
