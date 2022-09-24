@@ -9,9 +9,7 @@ import { RouterModule } from '@angular/router';
 import { RightMenuComponent } from './right-menu/right-menu.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { RightMenuItemComponent } from './right-menu-item/right-menu-item.component';
-import {loadRemoteModule} from "@nrwl/angular/mf";
 import {ROUTES} from "../app.routes";
-import {AppModule} from "../app.module";
 import {AuthModule} from "@auth0/auth0-angular";
 import {environment} from "../../environments/environment";
 
