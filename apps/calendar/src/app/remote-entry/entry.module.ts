@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
+import {FullCalendarModule} from "@fullcalendar/angular";
 import { RemoteEntryComponent } from './entry.component';
 import { CalendarComponent } from '../calendar-components/calendar/calendar.component';
 
@@ -15,6 +15,7 @@ import { CalendarComponent } from '../calendar-components/calendar/calendar.comp
         component: RemoteEntryComponent,
       },
     ]),
+    FullCalendarModule
   ],
   providers: [],
   exports: [RemoteEntryComponent],
