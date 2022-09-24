@@ -41,7 +41,7 @@ export const MENUS : menu[] = [
     {
         name : "Calendar",
         icon : "calendar_month",
-        link : false,
+        link : "calendar",
         open : false
     },
 
