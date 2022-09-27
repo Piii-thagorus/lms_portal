@@ -1,10 +1,11 @@
 pipeline {
-    agent any
+    agent none
+    environment {
+        NX_BRANCH = env.BRANCH_NAME.replace('PR', '')
+    }
     stages {
-        stage('Stage 1') {
-            steps {
-                echo 'Hello world!'
-            }
+        stage('Pipeline') {
+            sh "node --version"
         }
     }
 }
