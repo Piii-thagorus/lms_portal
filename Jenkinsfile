@@ -11,7 +11,22 @@ pipeline {
     stages {
         stage('Pipeline') {
             parallel {
-               stage()
+               stage('Main'){
+                    when {
+                        branch 'main'
+                    }
+                    steps {
+                        sh "npm ci"
+                    }
+               }
+               stage {
+                    when {
+                        not { branch 'main'}
+                    }
+                    steps{
+                        sh "npm ci"
+                    }
+               }
             }
         }
     }
