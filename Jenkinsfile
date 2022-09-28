@@ -25,8 +25,7 @@ pipeline {
                 SCANNER_HOME = tool 'Sonar-scanner'
             }
             steps{
-                withSonarQubeEnv(credentialsId: 'sonar-credentialsId',
-                installationName: 'SonarqubeCredential') {
+                withSonarQubeEnv('LMS_Sonarqube') {
                     sh '''$SCANNER_HOME/bin/sonar-scanner \
                     -Dsonar.projectKey=lms
                     -Dsonar.projectName=lms \
