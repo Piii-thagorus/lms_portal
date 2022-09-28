@@ -19,7 +19,7 @@ pipeline {
                         sh "npm ci"
                     }
                }
-               stage {
+               stage('Pr') {
                     when {
                         not { branch 'main'}
                     }
