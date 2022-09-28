@@ -4,9 +4,6 @@ pipeline {
     options {
         parallelsAlwaysFailFast()
     }
-    environment {
-        NX_BRANCH = env.BRANCH_NAME.replace('PR-', '')
-    }
 
     stages {
         stage('Pipeline') {
