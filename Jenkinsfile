@@ -27,11 +27,7 @@ pipeline {
             steps{
                 withSonarQubeEnv('LMS_Sonarqube') {
                     sh '''$SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.projectKey=lms
-                    -Dsonar.typescript.tsconfigPath=tsconfig.base.json \
-                    -Dsonar.test.inclusions=**/* .spec.ts \
-                    -Dsonar, testExecut lonReportPaths-test-reports/ut_report.xml\
-                    -Dsonar.javascript.lcov.reportPaths-coverage/lcov.info
+                    -Dsonar.projectKey=lms \
                     '''
                 }
             }
