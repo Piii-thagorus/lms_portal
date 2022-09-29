@@ -28,7 +28,7 @@ pipeline {
                 withSonarQubeEnv('LMS_Sonarqube') {
                     sh '''$SCANNER_HOME/bin/sonar-scanner \
                     -Dsonar.projectKey=lms
-                    -Dsonar.projectName=[My Project Name]\
+                    -Dsonar.projectName='My Project Name'\
                     -Dsonar.sources=./apps
                     -Dsonar.tests=./apps \
                     -Dsonar.typescript.tsconfigPath=tsconfig.base.json \
