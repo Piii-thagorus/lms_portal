@@ -8,8 +8,8 @@ import {NewsApiService} from "../../services/news.api.service";
 })
 export class NewsAPIComponent implements OnInit {
 
-  articles !: Array<never>;
-  sources !: Array<never>;
+  articles !: Array<any>;
+  sources !: Array<any>;
 
   constructor(private newsAPI: NewsApiService) {}
 
