@@ -1,4 +1,4 @@
 module.exports = {
   name: 'home',
-  remotes: ['login', 'calendar'],
+  remotes: ['login', 'calendar', 'new-api'],
 };

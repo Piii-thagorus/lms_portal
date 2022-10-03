@@ -1,10 +1,14 @@
 import {Routes} from "@angular/router";
-import {RightMenuComponent} from "./navigation/right-menu/right-menu.component";
-import {LeftMenuComponent} from "./navigation/left-menu/left-menu.component";
 
 export const ROUTES : Routes = [
 
 
+    {
+        path: '',
+        loadChildren: () => import(
+            'new-api/Module'
+            ).then((m) => m.RemoteEntryModule)
+    },
     {
         path: '',
         outlet: 'topMenu',

@@ -8,6 +8,8 @@
     "home-e2e": "apps/home-e2e",
     "login": "apps/login",
     "login-e2e": "apps/login-e2e",
+    "new-api": "apps/new-api",
+    "new-api-e2e": "apps/new-api-e2e",
     "shared": "libs/shared"
   }
 }

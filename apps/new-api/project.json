@@ -1,0 +1,113 @@
+{
+  "projectType": "application",
+  "sourceRoot": "apps/new-api/src",
+  "prefix": "lms-portal-mfe",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/new-api",
+        "index": "apps/new-api/src/index.html",
+        "main": "apps/new-api/src/main.ts",
+        "polyfills": "apps/new-api/src/polyfills.ts",
+        "tsConfig": "apps/new-api/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/new-api/src/favicon.ico", "apps/new-api/src/assets"],
+        "styles": ["apps/new-api/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/new-api/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/new-api/src/environments/environment.ts",
+              "with": "apps/new-api/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/new-api/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "new-api:build:production"
+        },
+        "development": {
+          "browserTarget": "new-api:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4203,
+        "publicHost": "http://localhost:4203"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "new-api:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/new-api/**/*.ts", "apps/new-api/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/new-api"],
+      "options": {
+        "jestConfig": "apps/new-api/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/angular:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "new-api:build",
+        "port": 4203
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "new-api:build:development"
+        },
+        "production": {
+          "buildTarget": "new-api:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}
