@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NewsApiService} from "../../services/news.api.service";
+import {Categories} from "./categories";
 
 @Component({
   selector: 'lms-portal-mfe-news-api-component',
@@ -8,22 +9,48 @@ import {NewsApiService} from "../../services/news.api.service";
 })
 export class NewsAPIComponent implements OnInit {
 
-  articles !: Array<any>;
-  sources !: Array<any>;
+  articles !: [];
 
-  constructor(private newsAPI: NewsApiService) {}
+  sources !: [];
+
+  slidesPerGrid : number
+  categories = Object.values(Categories)
+
+  categoryMapArticle : {category: string, articles: []}[]= [];
+
+  constructor(private newsAPI: NewsApiService) {
+
+    this.slidesPerGrid = 4
+    this.initCategoryObjects()
+
+  }
 
   ngOnInit(): void {
 
-    // @ts-ignore
-    this.newsAPI.initArticles().subscribe(data => this.articles = data['articles']);
+   this.newsAPI.initArticles().subscribe(data => this.articles = data['articles']);
 
-    // @ts-ignore
     this.newsAPI.initSources().subscribe( data => this.sources = data['sources'])
   }
 
   searchArticles(source: string){
-    // @ts-ignore
     this.newsAPI.getArticlesByID(source).subscribe( data => this.articles = data['articles'])
+  }
+
+  initCategoryObjects()  {
+
+
+    this.categories.forEach((category) =>{
+      this.newsAPI.getArticlesByCategory(category).
+                subscribe(data =>
+          this.categoryMapArticle.push({category: category, articles: data['articles']})
+      )
+    })
+  }
+
+  getTotalSlidesPerGrid(slides : []) : number {
+
+
+
+    return this.slidesPerGrid
   }
 }
