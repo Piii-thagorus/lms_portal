@@ -1,6 +1,7 @@
 pipeline {
-    docker.image("").inside('--tmpfs /.config'){
-    
+    agent{
+        docker.image("").inside('--tmpfs /.config')
+    }
     stage("Prepare"){
          sh 'npm install'
 
@@ -47,5 +48,4 @@ pipeline {
             }
        }
         }    
-    }
 }
