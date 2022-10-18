@@ -1,5 +1,11 @@
 pipeline {
-    agent any
+    docker.image("").inside('--tmpfs /.config'){
+    
+    stage("Prepare"){
+         sh 'npm install'
+
+    }
+    
     options {
         parallelsAlwaysFailFast()
     }
@@ -40,5 +46,6 @@ pipeline {
                 }
             }
        }
+        }    
     }
 }
