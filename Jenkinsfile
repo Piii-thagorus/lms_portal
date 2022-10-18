@@ -1,6 +1,6 @@
 pipeline {
     agent{
-        docker.image("").inside('--tmpfs /.config')
+        docker.image("node:18.11.0").inside('--tmpfs /.config')
     }
     stage("Prepare"){
          sh 'npm install'
