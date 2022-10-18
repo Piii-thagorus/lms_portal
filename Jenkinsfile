@@ -10,8 +10,8 @@ pipeline {
 
     stages {
     stage('Prepare'){
-
-         sh 'npm install'
+        steps{
+         sh 'npm install'}
 
     }
         stage('Pipeline') {
