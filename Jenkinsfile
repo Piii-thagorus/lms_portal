@@ -1,4 +1,9 @@
 pipeline {
+
+    environment {
+        HOME = "${env.WORKSPACE}"
+    }
+
     agent {
         docker { image "node:latest" }
     }
