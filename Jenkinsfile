@@ -1,6 +1,6 @@
 pipeline {
-    agent{
-        docker { image "node:18.11.0" }
+    agent {
+        docker { image"node:18.11.0" }
     }
     stage("Prepare"){
          sh 'npm install'
