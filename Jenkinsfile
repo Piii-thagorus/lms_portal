@@ -3,16 +3,17 @@ pipeline {
         docker { image"node:18.11.0" }
     }
 
-    stage('Prepare'){
-         sh 'npm install'
-
-    }
     
     options {
         parallelsAlwaysFailFast()
     }
 
     stages {
+    stage('Prepare'){
+
+         sh 'npm install'
+
+    }
         stage('Pipeline') {
             parallel {
                stage('Main'){
