@@ -1,12 +1,6 @@
 pipeline {
 
-    environment {
-        HOME = "${env.WORKSPACE}"
-    }
-
-    agent {
-            any
-    }
+    agent any
 
     
     options {
