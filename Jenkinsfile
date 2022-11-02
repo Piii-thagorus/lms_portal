@@ -5,7 +5,9 @@ pipeline {
     }
 
     agent {
-        docker { image "node:latest" }
+        docker {
+            any
+        } 
     }
 
     
@@ -17,7 +19,7 @@ pipeline {
 
     stage('Prepare'){
         steps{
-         sh 'npm install'
+         sh 'echo "starting"'
         }
 
     }
@@ -43,7 +45,7 @@ pipeline {
             steps{
                 withSonarQubeEnv('LMS_Sonarqube') {
                     sh '''$SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.projectKey=lms \
+                    -Dsonar.projectKey=jenkins-token \
                     '''
                 }
             }
