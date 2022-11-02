@@ -5,9 +5,7 @@ pipeline {
     }
 
     agent {
-        docker {
             any
-        } 
     }
 
     
