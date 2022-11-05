@@ -9,35 +9,59 @@ pipeline {
 
     stages {
 
-    stage('Prepare'){
-        steps{
-         sh 'echo "starting"'
-        }
-
-    }
-        stage('Pipeline') {
-            parallel {
-               stage('Main'){
-                    when {
-                        branch 'main'
-                    }
-                    steps {
-                        sh "npm ci"
-                    }
-               }
+ 
+        stage('Parrallel Testing') {
+            
+            agent{
+                docker {
+                    image 'node:latest'
+                }
             }
+            stages{
+               stage('Prepare'){
+            
+                    steps{
+                        sh 'npm install --force'
+                    }
+
+                }
+                stage('Building and Testing'){
+                    parallel {
+                        stage('Main'){
+                            
+                            when {
+                                not { branch 'main'}
+                            }
+                            
+                            steps {
+                                sh "npx nx repair"
+                            }
+                        }    
+                }
+            }}
         }
+        
         stage('Sonarqube analysis') {
+            
+            agent any
+            
             when {
                 not { branch 'main'}
             }
+            
             environment {
+                SONARQUBE_CREDENTIALS= credentials('sonarqube_server_credentials')
                 SCANNER_HOME = tool 'Sonar-scanner'
+                PROJECT_NAME = "LMS_Portal"
+                PROJECT_TOKEN= credentials("jenkins_token")
+
             }
             steps{
                 withSonarQubeEnv('LMS_Sonarqube') {
-                    sh '''$SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.projectKey=jenkins-token \
+                    sh '''$SCANNER_HOME/bin/sonar-scanner  -Dsonar.login=$SONARQUBE_CREDENTIALS_USR \
+                    -Dsonar.password=$SONARQUBE_CREDENTIALS_PSW \
+                    -Dsonar.projectKey=$PROJECT_TOKEN \
+                    -Dsonar.projectName=$PROJECT_NAME 
                     '''
                 }
             }
@@ -46,7 +70,7 @@ pipeline {
 
             steps{
                 timeout(time: 20, unit: 'MINUTES'){
-                      waitForQualityGate abortPipeline: true
+                      //waitForQualityGate abortPipeline: false
                 }
             }
        }
