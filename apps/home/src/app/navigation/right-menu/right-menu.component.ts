@@ -9,6 +9,7 @@ import {menu, MENUS} from "../menu-elements";
 export class RightMenuComponent {
 
   @Input() iconOnly  = false;
+
   menus : menu[] = MENUS;
 
   getMenus() : menu[]{

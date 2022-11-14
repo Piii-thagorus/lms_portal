@@ -46,10 +46,13 @@ import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {CdkMenuModule} from '@angular/cdk/menu';
 import {DialogModule} from '@angular/cdk/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   exports: [
     A11yModule,
+    BrowserAnimationsModule,
     CdkAccordionModule,
     ClipboardModule,
     CdkMenuModule,
@@ -92,6 +95,7 @@ import {DialogModule} from '@angular/cdk/dialog';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
+    NgScrollbarModule,
     OverlayModule,
     PortalModule,
     ScrollingModule,
