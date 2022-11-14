@@ -2,16 +2,13 @@ pipeline {
 
     agent any
 
-    
     options {
         parallelsAlwaysFailFast()
     }
 
     stages {
-
  
         stage('Parrallel Testing') {
-            
             agent{
                 docker {
                     image 'node:latest'
@@ -21,7 +18,16 @@ pipeline {
                stage('Prepare'){
             
                     steps{
-                        sh 'npm install --force'
+                        cache(maxCacheSize: 1000, defaultBranch: 'test', caches: [
+                            [
+                                $class: 'ArbitraryFileCache', path: 'node_modules', 
+                                cacheValidityDecidingFile: 'package-lock.json', compressionMethod: 'TARGZ'
+                            ]
+                        ]) {
+                                sh 'npm install --force'
+                                sh 'ls ~/.npm'
+                            }
+                        
                     }
 
                 }
@@ -40,7 +46,6 @@ pipeline {
                 }
             }}
         }
-        
         stage('Sonarqube analysis') {
             
             agent any
