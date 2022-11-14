@@ -18,9 +18,7 @@
             </mat-drawer>
             <mat-drawer-content style="overflow: hidden;">
                 <lms-portal-mfe-top-menu [rightMenu]="sidenav" [drawer]="drawer" [leftMenu]="sidenav2" [matDrawerShow]="matDrawerShow" style="z-index: 500"></lms-portal-mfe-top-menu>
-                <ng-scrollbar style="height: calc(100% - 33px);">
                     <router-outlet style="padding: 25px;"></router-outlet>
-                </ng-scrollbar>
             </mat-drawer-content>
         </mat-drawer-container>
     </mat-sidenav-content>
