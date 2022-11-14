@@ -1,4 +1,5 @@
 import {Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import {menu} from "../menu-elements";
 
 @Component({
@@ -10,6 +11,14 @@ export class RightMenuItemComponent {
   @Input() menu !: any;
   @Input() iconOnly !: boolean;
   @Input() subMenu  = false;
+
+  showDelay : FormControl;
+  hideDelay : FormControl;
+
+  constructor(){
+    this.showDelay = new FormControl(0);
+    this.hideDelay = new FormControl(0);
+  }
   openLink() : void {
     this.menu.open = !this.menu.open;
   }
