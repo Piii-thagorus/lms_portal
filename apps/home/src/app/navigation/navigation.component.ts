@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MatDrawerMode} from "@angular/material/sidenav";
+import {MatDrawer, MatDrawerMode} from "@angular/material/sidenav";
 import {MediaObserver} from "@angular/flex-layout";
 
 @Component({
@@ -34,6 +34,19 @@ export class NavigationComponent {
   //   return outlet.activatedRouteData.animation;
   //   //return outlet.isActivated ? outlet.activatedRoute : ''
   // }
+
+  leftMenuSideNavMode() : MatDrawerMode {
+
+     this.sideNavMode = ( this.media.isActive('lt-md ') ) ? 
+                              "push" : "side";
+
+      return this.sideNavMode;
+  }
+
+  setIconOnly() : boolean {
+
+    return  !this.media.isActive('lt-md') ;
+  }
 
   toggleView() {
     if (this.media.isActive('gt-md')) {
