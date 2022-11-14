@@ -1,5 +1,5 @@
 <mat-sidenav-container autosize class="container" fullscreen>
-    <mat-sidenav  [mode]="sideNavMode" class="sidenav" #sidenav [opened]="sideNavOpened" style="overflow: hidden;">
+    <mat-sidenav id="right-menu"  [mode]="sideNavMode" class="sidenav" #sidenav [opened]="sideNavOpened" style="overflow: hidden;">
         <mat-toolbar color="primary" class="mat-elevation-z4">
             <img src="../../assets/logo.jpg" width="36px">
             <h1 class="logo">
@@ -25,7 +25,7 @@
         </mat-drawer-container>
     </mat-sidenav-content>
 
-    <mat-sidenav #sidenav2 position="end" mode="over">
+    <mat-sidenav id="left-menu" #sidenav2 position="end" mode="over">
         <lms-portal-mfe-left-menu [leftMenu]="sidenav2"></lms-portal-mfe-left-menu>
     </mat-sidenav>
 
