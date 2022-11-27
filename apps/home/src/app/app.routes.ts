@@ -21,7 +21,13 @@ export const ROUTES : Routes = [
         loadChildren: () => import(
             'calendar/Module'
             ).then((m) => m.RemoteEntryModule)
+    },
+    {
+        path: '',
+        outlet: 'loading',
+        loadChildren: () => import(
+            'loader/Module'
+        ).then((m) => m.RemoteEntryModule)
     }
-
 ];
 
