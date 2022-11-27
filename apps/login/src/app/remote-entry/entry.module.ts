@@ -38,9 +38,9 @@ import { SignupButtonComponent } from './components/signup-button/signup-button.
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    AuthModule.forRoot({
-        ...environment.auth
-      })
+    // AuthModule.forRoot({
+    //     ...environment.auth
+    //   })
   ],
   providers: [],
 })
