@@ -1,7 +1,9 @@
-<lms-portal-mfe-login-button *ngIf="(auth.isAuthenticated$ | async) === false">
 
-</lms-portal-mfe-login-button>
+<ng-container *ngIf="auth.isAuthenticated$ | async; else unAuthenticated">
+    <lms-portal-mfe-logout-button ></lms-portal-mfe-logout-button>
+</ng-container>
 
-<lms-portal-mfe-logout-button *ngIf="auth.isAuthenticated$ | async">
-
-</lms-portal-mfe-logout-button>
+<ng-template #unAuthenticated>
+    <lms-portal-mfe-signup-button></lms-portal-mfe-signup-button>
+    <lms-portal-mfe-login-button ></lms-portal-mfe-login-button>
+</ng-template>
