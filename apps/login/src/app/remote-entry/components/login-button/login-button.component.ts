@@ -1,19 +1,27 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from "@auth0/auth0-angular";
 
 @Component({
   selector: 'lms-portal-mfe-login-button',
-  templateUrl: './login-button.component.html',
+  template:  `
+      <button mat-button (click)="loginWithRedirect()">
+          <i class="material-icons">login</i>LogIn
+      </button>
+  `,
   styles: [],
 })
-export class LoginButtonComponent implements OnInit {
+export class LoginButtonComponent {
 
 
   constructor(public auth : AuthService) {}
 
-  ngOnInit(): void {}
 
    loginWithRedirect(): void {
-      this.auth.loginWithRedirect();
+      this.auth.loginWithRedirect({
+          appState: {
+            target: "/",
+          },
+          screen_hint: "login",
+      });
    }
 }

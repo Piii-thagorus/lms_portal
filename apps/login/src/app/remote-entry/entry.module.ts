@@ -3,20 +3,27 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { LogInComponent } from './login.component';
-import {MatIconModule} from "@angular/material/icon";
-import {MatCardModule} from "@angular/material/card";
-import {FormsModule} from "@angular/forms";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatButtonModule} from "@angular/material/button";
-import {AuthComponentComponent} from "./components/auth-component/auth-component.component";
-import {LogoutButtonComponent} from "./components/logout-button/logout-button.component";
-import {LoginButtonComponent} from "./components/login-button/login-button.component";
-import {AuthModule} from "@auth0/auth0-angular";
-import {environment} from "../../environments/environment";
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { AuthComponentComponent } from './components/auth-component/auth-component.component';
+import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+import { LoginButtonComponent } from './components/login-button/login-button.component';
+import { SignupButtonComponent } from './components/signup-button/signup-button.component';
+//import { AuthModule } from '@auth0/auth0-angular';
+//import { environment } from '../../environments/environment';
 
 @NgModule({
-  declarations: [LogInComponent, AuthComponentComponent, LogoutButtonComponent, LoginButtonComponent],
+  declarations: [
+    LogInComponent,
+    AuthComponentComponent,
+    LogoutButtonComponent,
+    LoginButtonComponent,
+    SignupButtonComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([

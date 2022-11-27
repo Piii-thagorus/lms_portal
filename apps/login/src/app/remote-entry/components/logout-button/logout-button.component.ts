@@ -1,28 +1,24 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from "@auth0/auth0-angular";
 
 @Component({
   selector: 'lms-portal-mfe-logout-button',
-  templateUrl: './logout-button.component.html',
+  template: `
+      <button mat-button (click)="logOutWithRedirect()">
+          <i class="material-icons">logout</i>LogOut
+      </button>
+
+  `,
   styles: [],
 })
-export class LogoutButtonComponent implements OnInit {
+export class LogoutButtonComponent {
 
 
-  constructor(
-      public auth: AuthService,
-     //@Inject(Document) private doc: Document
-  ) {}
+  constructor(public auth: AuthService) {}
 
-  ngOnInit(): void {
-      //this.AUTH = this.injector.get(AuthService);
-  }
 
   logOutWithRedirect(): void {
     this.auth.logout()
   }
 
-  // getAuthOService(): AuthService {
-  //   return this.AUTH
-  // }
 }
