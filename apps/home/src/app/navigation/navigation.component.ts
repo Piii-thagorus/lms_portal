@@ -1,71 +1,70 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MatDrawer, MatDrawerMode} from "@angular/material/sidenav";
+import {MatDrawerMode} from "@angular/material/sidenav";
 import {MediaObserver} from "@angular/flex-layout";
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'lms-portal-mfe-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
 })
-export class NavigationComponent {
-  @Input() isVisible = true;
-  visibility  = 'shown';
+export class NavigationComponent implements OnInit {
 
-  sideNavOpened  = true;
-  matDrawerOpened  = false;
-  matDrawerShow  = true;
-  sideNavMode: MatDrawerMode = 'side';
+    @Input() isVisible = true;
 
-  constructor(private media: MediaObserver) { }
+    visibility  = 'shown';
 
-  ngOnChanges = () => {
-    this.visibility = this.isVisible ? 'shown' : 'hidden';
-  };
+    isAuth0Loading$ = this.auth.isLoading$;
 
-  ngOnInit(): void {
-    this.media.asObservable().subscribe( () => {
-      this.toggleView();
-    });
+    sideNavOpened  = true;
+    matDrawerOpened  = false;
+    matDrawerShow  = true;
+    sideNavMode: MatDrawerMode = 'side';
 
-  }
+    constructor(private media: MediaObserver, private auth: AuthService) { }
 
-  // getRouteAnimation(outlet) {
-  //
-  //   return outlet.activatedRouteData.animation;
-  //   //return outlet.isActivated ? outlet.activatedRoute : ''
-  // }
+    ngOnChanges = () => {
+      this.visibility = this.isVisible ? 'shown' : 'hidden';
+    };
 
-  leftMenuSideNavMode() : MatDrawerMode {
+    ngOnInit(): void {
+      this.media.asObservable().subscribe( () => {
+        this.toggleView();
+      });
 
-     this.sideNavMode = ( this.media.isActive('lt-md ') ) ? 
-                              "push" : "side";
+    }
+
+
+    leftMenuSideNavMode() : MatDrawerMode {
+
+      this.sideNavMode = ( this.media.isActive('lt-md ') )? "push" : "side";
 
       return this.sideNavMode;
-  }
 
-  setIconOnly() : boolean {
-
-    return  !this.media.isActive('lt-md') ;
-  }
-
-  toggleView() {
-    if (this.media.isActive('gt-md')) {
-      this.sideNavMode = 'side';
-      this.sideNavOpened = true;
-      this.matDrawerOpened = false;
-      this.matDrawerShow = true;
-
-    } else if(this.media.isActive('gt-xs')) {
-      this.sideNavMode = 'side';
-      this.sideNavOpened = false;
-      this.matDrawerOpened = true;
-      this.matDrawerShow = true;
-    } else if (this.media.isActive('lt-sm')) {
-      this.sideNavMode = 'over';
-      this.sideNavOpened = false;
-      this.matDrawerOpened = false;
-      this.matDrawerShow = false;
     }
-  }
+
+    setIconOnly() : boolean {
+      return  !this.media.isActive('lt-md') ;
+    }
+
+    toggleView() {
+      if (this.media.isActive('gt-md')) {
+        this.sideNavMode = 'side';
+        this.sideNavOpened = true;
+        this.matDrawerOpened = false;
+        this.matDrawerShow = true;
+
+      } else if(this.media.isActive('gt-xs')) {
+        this.sideNavMode = 'side';
+        this.sideNavOpened = false;
+        this.matDrawerOpened = true;
+        this.matDrawerShow = true;
+      } else if (this.media.isActive('lt-sm')) {
+        this.sideNavMode = 'over';
+        this.sideNavOpened = false;
+        this.matDrawerOpened = false;
+        this.matDrawerShow = false;
+      }
+    }
 
 }
