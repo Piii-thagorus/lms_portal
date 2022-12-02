@@ -1,1 +1,108 @@
-<full-calendar [deepChangeDetection]="deepChangeDetection" [options]="calendar_options"></full-calendar>
+
+<mat-card fxLayout="column" fxLayoutAling="space-between stretch">
+    <mat-card-header >
+        <div class="row text-center" fxLayout.lt-lg="colum" fxlayout.gt-md="row" style="width: 100%" fxLayoutAlign="space-between center">
+            <div class="col-md-4"   >
+                <div class="btn-group">
+                    <div class="btn"
+                    mwlCalendarPreviousView
+                    [view] = "view"
+                    [(viewDate)]="viewDate"
+                    (viewDateChange)="closeOpenMonthViewDay()"
+                    >
+                        <mat-icon>arrow_back_ios</mat-icon>
+                    </div>
+                    <div
+                        class="btn btn-outline-secondary"
+                        mwlCalendarToday
+                        [(viewDate)]="viewDate"
+                    >
+                    Today
+                    </div>
+                    <div
+                        class="btn"
+                        mwlCalendarNextView
+                        [view]="view"
+                        [(viewDate)]="viewDate"
+                        (viewDateChange)="closeOpenMonthViewDay()"
+                    >
+                        <mat-icon>arrow_forward_ios</mat-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"  >
+                <h3 > &nbsp;{{viewDate  | date : 'LLLL'}}&nbsp;</h3>
+                <h3 >{{viewDate | date : 'yyyy'}}</h3>
+            </div>
+
+            <div class="col-md-4 ">
+                <div class="btn-group" ngbDropdown>
+                        <button type="button" class="btn" id="dropdownBasic1" ngbDropdownToggle>
+                            {{ this.view | titlecase }}
+                        </button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button 
+                                (click)="setView(CalendarView.Month)"
+                                [class.active]="view === CalendarView.Month"
+                                ngbDropdownItem
+                            >
+                                Month
+                            </button>
+                            <button 
+                                ngbDropdownItem
+                                (click)="setView(CalendarView.Week)"
+                                [class.active]="view === CalendarView.Week"
+                            >
+                                Week
+                            </button>
+                            <button 
+                                ngbDropdownItem
+                                (click)="setView(CalendarView.Day)"
+                                [class.active]="view===CalendarView.Day"
+                            >
+                                Day
+                            </button>
+                        </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </mat-card-header>
+    <mat-card-content>
+        <div [ngSwitch]="view">
+
+            <mwl-calendar-month-view
+                *ngSwitchCase="CalendarView.Month"
+                [viewDate]="viewDate"
+                [events]="events"
+                [refresh]="refresh"
+                [activeDayIsOpen]="activeDayIsOpen"
+                (dayClicked)="dayClicked($event.day)"
+                (eventClicked)="handleEvent('Clicked', $event.event)"
+                (eventTimesChanged)="eventTimesChanged($event)"
+            ></mwl-calendar-month-view>
+
+            <mwl-calendar-week-view
+            *ngSwitchCase="CalendarView.Week"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+        >
+        </mwl-calendar-week-view>
+
+        <mwl-calendar-day-view
+            *ngSwitchCase="CalendarView.Day"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+        >
+        </mwl-calendar-day-view>
+
+        </div>
+    </mat-card-content>
+
+</mat-card>
