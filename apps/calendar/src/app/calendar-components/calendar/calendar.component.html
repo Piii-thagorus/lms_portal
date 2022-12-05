@@ -1,4 +1,3 @@
-
 <mat-card fxLayout="column" fxLayoutAling="space-between stretch">
     <mat-card-header >
         <div class="row text-center" fxLayout.lt-lg="colum" fxlayout.gt-md="row" style="width: 100%" fxLayoutAlign="space-between center">
@@ -78,7 +77,7 @@
                 [refresh]="refresh"
                 [activeDayIsOpen]="activeDayIsOpen"
                 (dayClicked)="dayClicked($event.day)"
-                (eventClicked)="handleEvent('Clicked', $event.event)"
+                (eventClicked)="onEventClick(content, $event.event)"
                 (eventTimesChanged)="eventTimesChanged($event)"
             ></mwl-calendar-month-view>
 
@@ -106,3 +105,121 @@
     </mat-card-content>
 
 </mat-card>
+
+<ng-template #content let-modal>
+    <div class="modal-header" >
+        <h4 class="modal-title" id="modal-basic-title">{{selectedEvent?.title}}</h4>
+        <button type="button" class="btn-close" arial-label="Close" (click)="modal.dismiss('Cross click')"></button> 
+    </div>
+
+    <div class="modal-body" >
+        <div fxLayout="column" style="width: 100%;" fxLayoutAlign="space-evenly center">
+            <h6 *ngIf="selectedEvent?.start">From: {{selectedEvent?.start | date: 'medium' }}</h6> 
+            <br/>
+            <h6 *ngIf="selectedEvent?.end">To: {{selectedEvent?.end | date: 'medium'}}</h6> 
+            <br/>
+        </div>
+        <div class="col-md-4" style="width: 100%;" fxLayoutAlign="space-evenly center"> 
+            <div class="btn btn-outline-secondary" (click)="openEditEventForm(editContent)">Edit</div>
+            <div class="btn btn-danger" 
+                (click)="confirmDelete(deleteContent); modal.close('Delete click')">Delete</div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #deleteContent let-deleteModal>
+
+    <div class="modal-header">
+        <h4> Are you sure you want to <em>delete</em> this event</h4>
+        <button type="button" class="btn-close" arial-label="Close"
+            (click)="deleteModal.dismiss('Cross click')"></button> 
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" 
+        (click)=" deleteModal.close();">
+            Cancel
+        </button>
+        
+        <button type="button" class="btn btn-danger" 
+            (click)="deleteEvent(); deleteModal.close()">
+            Yes
+        </button>
+    </div>
+
+</ng-template>
+
+<ng-template #editContent let-editModal>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Event</h4>
+        <button type="button" class="btn-close" arial-label="Close"
+            (click)="editModal.dismiss('Cross click')"></button> 
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="editEventForm"> 
+            <div class="mb-3">
+                <label for="eventTitle">Event Title:&nbsp;</label>
+                <div class="input-group">
+                    <input 
+                    id="eventTitle" 
+                    class="form-control" 
+                    formControlName="title"
+                    >
+                </div>
+                <label for="startDate" >Start:</label>
+                <div class="input-group">
+                    <input
+                        id="startDate"
+                        class="form-control"
+                        ngbDatepicker
+                        #dp="ngbDatepicker"
+                        formControlName="start"
+                    >
+                    
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()">
+                        <fa-icon icon="calendar"></fa-icon>
+                    </button>
+                </div>
+                <br>
+                <div class="input-group custom-control custom-checkbox">
+                    <input 
+                        type="checkbox" 
+                        class="custom-control-input"  
+                        id="allDay" 
+                        formControlName="allDay"
+                    >
+                    <label class="custom-control-label" for="allDay">&nbsp; All Day Event</label>
+                </div>
+                <br>
+                <div *ngIf="!editEventForm.value.allDay">
+                    <label for="endDate" >End:</label>
+                    <div   class="input-group">
+                        <input
+                            id="endDate"
+                            class="form-control"
+                            name="endDate"
+                            ngbDatepicker
+                            #dp="ngbDatepicker"
+                            [value]="selectedEvent?.end | date: 'medium' "
+                            formControlName="end"
+                        />
+                        <button class="btn btn-outline-secondary" (click)="dp.toggle()">
+                            <fa-icon icon="calendar"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-success" 
+        data-toggle="tooltip" data-placement="top" title="Update changes of the event"
+        (click)="saveEditEventForm();">
+            Update
+        </button>
+        <button type="button" class="btn btn-outline-secondary" 
+        data-toggle="tooltip" data-placement="top" title="Cancel updating the event"
+        (click)=" editModal.close();">
+            Cancel
+        </button>
+    </div>
+</ng-template>
